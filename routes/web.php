@@ -13,8 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.pages.index');
-});
+//Show index and list tariffs plans
+Route::get('/', 'TariffsController@ListTariffsInternet')->name('index');
 
+//show login form
+Route::post('/login', 'LoginController@loginForm')->name('showLogin');
+
+//Generate Auth  and show portal 
+Route::post('/loginPortal', 'LoginController@Login')->name('loginPortal');
+
+//show checkout form
+Route::post('/internet', 'PaymentController@CheckoutForm')->name('internet');
+
+//Create MOA Payment
+Route::post('/payment', 'PaymentController@CreatePaymentMoa')->name('payment');
+
+//Portal Logout
+Route::get('/logout', 'LoginController@logout')->name('logout');
 

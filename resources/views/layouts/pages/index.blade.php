@@ -13,7 +13,7 @@
 <main id="main">
 
 
-    <!-- ======= Pricing Section ======= -->
+    <!-- ======= Pricing Section ======= --> 
     <section id="pricing" class="pricing">
       <div class="container">
 
@@ -23,70 +23,49 @@
 
         <div class="row">
 
-          <div class="col-lg-3 col-md-6">
-            <div class="box featured">
-              <h3>Free</h3>
-              <h4><sup>$</sup>0<span> / month</span></h4>
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-               
-              </ul>
-              <div class="btn-wrap">
-                <a href="inner-page.html" class="btn-buy">Comprar</a>
-              </div>
-            </div>
-          </div>
+          @foreach ($tariffs as $tariff)
 
-          <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
-            <div class="box featured">
-              <h3>Business</h3>
-              <h4><sup>$</sup>19<span> / month</span></h4>
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-              
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Comprar</a>
-              </div>
-            </div>
-          </div>
+            @if( $tariff ->partners_ids[0] == 2)
 
-          <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
-            <div class="box featured">
-              <h3>Developer</h3>
-              <h4><sup>$</sup>29<span> / month</span></h4>
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Comprar</a>
-              </div>
-            </div>
-          </div>
+            <div class="col-lg-3 col-md-2 col-sm-3 ">
+              <div class="box featured">
+                <h3>{{$tariff->title}}</h3>
+                <h4><sup>$</sup>{{number_format($tariff->price, 2)}}</h4>
+                <div class="social-links text-center text-md-right pt-3 pt-md-0">
+                  <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                  <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                  <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                  <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                  <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                </div>
+                <div class="btn-wrap">
 
-          <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
-            <div class="box featured">
-              <span class="advanced">Advanced</span>
-              <h3>Ultimate</h3>
-              <h4><sup>$</sup>49<span> / month</span></h4>
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Comprar</a>
+                  <!--form method="POST" action="{{route('internet')}}"-->
+                  <form method="POST" action="{{route('showLogin')}}">
+                    {{ csrf_field() }}
+                    <input type="hidden" class="form-control"  name="tariffId" id="tariffId" value="{{$tariff->id}}">
+                    <input type="hidden" class="form-control"  name="tariffName" id="tariffName" value="{{$tariff->title}}">
+                    <input type="hidden" class="form-control"  name="tariffPrice" id="tariffPrice" value="{{number_format($tariff->price, 2)}}">
+                    <input type="submit" class="btn-buy" value="Comprar">
+                  </form>
+                 
+                </div>
               </div>
             </div>
-          </div>
+            @endif
+          @endforeach
+
+
+          
+      
 
         </div>
 
       </div>
     </section><!-- End Pricing Section -->
+
+
+   
 
 
 </main><!-- End #main -->
